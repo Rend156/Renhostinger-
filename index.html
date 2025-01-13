@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mailer Panel</title>
+    <style>
+        body {
+            background-color: #0A043C;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            background-color: #14142B;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #1DBF73;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #17A365;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1DBF73;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 RESS TEAM RENDZZ 🚀</h1>
+        <form id="emailForm">
+            <input type="text" id="panelName" placeholder="Nama Yang Diinginkan" required><br>
+            <input type="text" id="panelUrl" placeholder="Panel Murni" required><br>
+            <button type="button" onclick="changeData()">Ganti Data</button><br>
+            <input type="email" id="newEmail" placeholder="Tambah Email" required><br>
+            <input type="number" id="resultCount" placeholder="Jumlah Result" required><br>
+            <button type="button" onclick="addEmail()">Tambah Email</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Jumlah Result</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="emailList">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><button onclick="deleteRow(this)">Hapus</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function changeData() {
+            const panelName = document.getElementById('panelName').value;
+            const panelUrl = document.getElementById('panelUrl').value;
+            alert(`Nama: ${panelName}, URL Panel: ${panelUrl}`);
+        }
+
+        function addEmail() {
+            const email = document.getElementById('newEmail').value;
+            const resultCount = document.getElementById('resultCount').value;
+            if (email && resultCount) {
+                const table = document.getElementById('emailList');
+                const row = table.insertRow();
+                const emailCell = row.insertCell(0);
+                const resultCell = row.insertCell(1);
+                const actionCell = row.insertCell(2);
+
+                emailCell.innerHTML = email;
+                resultCell.innerHTML = resultCount;
+                actionCell.innerHTML = '<button onclick="deleteRow(this)">Hapus</button>';
+
+                document.getElementById('newEmail').value = '';
+                document.getElementById('resultCount').value = '';
+            } else {
+                alert('Mohon isi semua kolom.');
+            }
+        }
+
+        function deleteRow(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
+    </script>
+</body>
+</html>
